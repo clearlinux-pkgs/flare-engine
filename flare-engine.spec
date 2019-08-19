@@ -4,12 +4,13 @@
 #
 Name     : flare-engine
 Version  : 1.11
-Release  : 1
+Release  : 2
 URL      : https://github.com/flareteam/flare-engine/archive/v1.11.tar.gz
 Source0  : https://github.com/flareteam/flare-engine/archive/v1.11.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-3.0
+Requires: flare-engine-bin = %{version}-%{release}
 Requires: flare-engine-data = %{version}-%{release}
 Requires: flare-engine-license = %{version}-%{release}
 Requires: flare-engine-man = %{version}-%{release}
@@ -26,6 +27,16 @@ Flare (Free Libre Action Roleplaying Engine) is a simple game engine
 built to handle a very specific kind of game: single-player 2D action RPGs.
 Flare is not a reimplementation of an existing game or engine.
 It is a tribute to and exploration of the action RPG genre.
+
+%package bin
+Summary: bin components for the flare-engine package.
+Group: Binaries
+Requires: flare-engine-data = %{version}-%{release}
+Requires: flare-engine-license = %{version}-%{release}
+
+%description bin
+bin components for the flare-engine package.
+
 
 %package data
 Summary: data components for the flare-engine package.
@@ -59,7 +70,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1566188840
+export SOURCE_DATE_EPOCH=1566188992
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -70,12 +81,12 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
-%cmake ..
+%cmake .. -DBINDIR=bin
 make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1566188840
+export SOURCE_DATE_EPOCH=1566188992
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/flare-engine
 cp COPYING %{buildroot}/usr/share/package-licenses/flare-engine/COPYING
@@ -86,7 +97,10 @@ popd
 
 %files
 %defattr(-,root,root,-)
-/usr/games/flare
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/flare
 
 %files data
 %defattr(-,root,root,-)
