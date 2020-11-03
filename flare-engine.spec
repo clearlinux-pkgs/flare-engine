@@ -4,7 +4,7 @@
 #
 Name     : flare-engine
 Version  : 1.11
-Release  : 2
+Release  : 3
 URL      : https://github.com/flareteam/flare-engine/archive/v1.11.tar.gz
 Source0  : https://github.com/flareteam/flare-engine/archive/v1.11.tar.gz
 Summary  : No detailed summary available
@@ -64,13 +64,14 @@ man components for the flare-engine package.
 
 %prep
 %setup -q -n flare-engine-1.11
+cd %{_builddir}/flare-engine-1.11
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1566188992
+export SOURCE_DATE_EPOCH=1604362237
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -78,19 +79,19 @@ export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake .. -DBINDIR=bin
-make  %{?_smp_mflags} VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1566188992
+export SOURCE_DATE_EPOCH=1604362237
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/flare-engine
-cp COPYING %{buildroot}/usr/share/package-licenses/flare-engine/COPYING
-cp cmake/Copyright.txt %{buildroot}/usr/share/package-licenses/flare-engine/cmake_Copyright.txt
+cp %{_builddir}/flare-engine-1.11/COPYING %{buildroot}/usr/share/package-licenses/flare-engine/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/flare-engine-1.11/cmake/Copyright.txt %{buildroot}/usr/share/package-licenses/flare-engine/8137c6d95383060d26f828eeea5ff086578c639a
 pushd clr-build
 %make_install
 popd
@@ -218,8 +219,8 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/flare-engine/COPYING
-/usr/share/package-licenses/flare-engine/cmake_Copyright.txt
+/usr/share/package-licenses/flare-engine/8137c6d95383060d26f828eeea5ff086578c639a
+/usr/share/package-licenses/flare-engine/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 
 %files man
 %defattr(0644,root,root,0755)
