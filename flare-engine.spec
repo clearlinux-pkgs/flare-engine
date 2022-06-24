@@ -4,7 +4,7 @@
 #
 Name     : flare-engine
 Version  : 1.13.04
-Release  : 7
+Release  : 8
 URL      : https://github.com/flareteam/flare-engine/archive/v1.13.04/flare-engine-1.13.04.tar.gz
 Source0  : https://github.com/flareteam/flare-engine/archive/v1.13.04/flare-engine-1.13.04.tar.gz
 Summary  : No detailed summary available
@@ -81,7 +81,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656028160
+export SOURCE_DATE_EPOCH=1656110311
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -131,7 +131,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1656028160
+export SOURCE_DATE_EPOCH=1656110311
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/flare-engine
 cp %{_builddir}/flare-engine-1.13.04/COPYING %{buildroot}/usr/share/package-licenses/flare-engine/8624bcdae55baeef00cd11d5dfcfa60f68710a02
