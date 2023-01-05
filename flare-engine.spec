@@ -4,7 +4,7 @@
 #
 Name     : flare-engine
 Version  : 1.14
-Release  : 16
+Release  : 17
 URL      : https://github.com/flareteam/flare-engine/archive/v1.14/flare-engine-1.14.tar.gz
 Source0  : https://github.com/flareteam/flare-engine/archive/v1.14/flare-engine-1.14.tar.gz
 Summary  : No detailed summary available
